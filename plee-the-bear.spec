@@ -35,6 +35,7 @@ forest. Beginning of the game.
 %prep
 %setup -q -n %{name}-%{svn}
 %patch0 -p1 -b .default
+sed -ie 's/__LIB__/%_lib/' CMakeLists.txt
 
 %build
 cmake . -DCMAKE_INSTALL_PREFIX=%{_prefix}
@@ -52,11 +53,11 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-%{_bindir}/%{name}
-%{_bindir}/ptb
+%{_gamesbindir}/%{name}
+%{_gamesbindir}/ptb
 %{_libdir}/lib*.so
 %dir %{_libdir}/%{name}
 %{_libdir}/%{name}/lib*.so
-%dir %{_datadir}/%{name}
-%{_datadir}/%{name}/game_description
-%{_datadir}/%{name}/*.ra
+%dir %{_gamesdatadir}/%{name}
+%{_gamesdatadir}/%{name}/game_description
+%{_gamesdatadir}/%{name}/*.ra
