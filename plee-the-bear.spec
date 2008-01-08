@@ -47,6 +47,9 @@ rm -rf %{buildroot}
 %clean
 rm -rf %{buildroot}
 
+%post -p /sbin/ldconfig
+%postun -p /sbin/ldconfig
+
 %files
 %defattr(-,root,root)
 %{_bindir}/%{name}
