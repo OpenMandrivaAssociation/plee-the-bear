@@ -33,7 +33,7 @@ Following honey drops on the ground, Plee reaches the edge of the
 forest. Beginning of the game.
 
 %prep
-%setup -q -n %{name}-%{svn}
+%setup -q -n %{distname}
 %patch0 -p1 -b .default
 sed -ie 's/__LIB__/%_lib/' CMakeLists.txt
 
