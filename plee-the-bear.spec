@@ -1,16 +1,21 @@
 %define name plee-the-bear
-%define version 0
-%define svn 20080102
+%define version 0.1.1
+%define svn 0
 %define rel 1
+%if %{svn}
 %define release %mkrel 0.%{svn}.%{rel}
 %define distname %{name}-%{svn}
+%else
+%define release %mkrel %{rel}
+%define distname %{name}-%{version}
+%endif
 
 Summary: Plee The Bear 2D platform game
 Name: %{name}
 Version: %{version}
 Release: %{release}
 Source0: http://prdownloads.sourceforge.net/%{name}/%{distname}.tar.bz2
-Patch0:	 plee-the-bear-20080102-default.patch
+Patch0: plee-the-bear-0.1.1-games.patch
 License: GPL
 Group: Games/Arcade
 Url: http://plee-the-bear.sourceforge.net/
@@ -34,7 +39,7 @@ forest. Beginning of the game.
 
 %prep
 %setup -q -n %{distname}
-%patch0 -p1 -b .default
+%patch0 -p1 -b .games
 sed -ie 's/__LIB__/%_lib/' CMakeLists.txt
 
 %build
@@ -54,7 +59,7 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root)
 %{_gamesbindir}/%{name}
-%{_gamesbindir}/ptb
+%{_gamesbindir}/running-bear
 %{_libdir}/lib*.so
 %dir %{_libdir}/%{name}
 %{_libdir}/%{name}/lib*.so
