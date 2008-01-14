@@ -66,3 +66,6 @@ rm -rf %{buildroot}
 %dir %{_gamesdatadir}/%{name}
 %{_gamesdatadir}/%{name}/game_description
 %{_gamesdatadir}/%{name}/*.ra
+%{_datadir}/applications/plee-the-bear.desktop
+%{_datadir}/icons/hicolor/*/apps/ptb.png
+%{_datadir}/pixmaps/ptb.*
