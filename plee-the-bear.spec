@@ -49,6 +49,7 @@ cmake . -DCMAKE_INSTALL_PREFIX=%{_prefix}
 %install
 rm -rf %{buildroot}
 %makeinstall_std
+rm -f %{buildroot}%{_datadir}/menu/plee-the-bear
 
 %clean
 rm -rf %{buildroot}
