@@ -1,5 +1,5 @@
 %define name plee-the-bear
-%define version 0.1.1
+%define version 0.3.1
 %define svn 0
 %define rel 1
 %if %{svn}
@@ -16,7 +16,7 @@ Version: %{version}
 Release: %{release}
 Source0: http://prdownloads.sourceforge.net/%{name}/%{distname}.tar.bz2
 Patch0: plee-the-bear-0.1.1-games.patch
-License: GPL
+License: GPLv2
 Group: Games/Arcade
 Url: http://plee-the-bear.sourceforge.net/
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
