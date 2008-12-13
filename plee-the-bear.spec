@@ -1,27 +1,36 @@
-%define name plee-the-bear
-%define version 0.3.1
-%define svn 0
-%define rel 1
+%define _disable_ld_no_undefined	1
+%define _disable_ld_as_needed		1
+
+%define svn	0
+%define rel	1
 %if %{svn}
-%define release %mkrel 0.%{svn}.%{rel}
-%define distname %{name}-%{svn}
+%define release		%mkrel 0.%{svn}.%{rel}
+%define distname	%{name}-%{svn}
 %else
-%define release %mkrel %{rel}
-%define distname %{name}-%{version}
+%define release		%mkrel %{rel}
+%define distname	%{name}-%{version}
 %endif
 
-Summary: Plee The Bear 2D platform game
-Name: %{name}
-Version: %{version}
-Release: %{release}
-Source0: http://prdownloads.sourceforge.net/%{name}/%{distname}.tar.bz2
-Patch0: plee-the-bear-0.1.1-games.patch
-License: GPLv2
-Group: Games/Arcade
-Url: http://plee-the-bear.sourceforge.net/
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires: boost-devel cmake libclaw-devel mesagl-devel
-BuildRequires: SDL_mixer-devel wxGTK-devel
+Summary:	Plee The Bear 2D platform game
+Name:		plee-the-bear
+Version:	0.3.1
+Release:	%{release}
+Source0:	http://prdownloads.sourceforge.net/%{name}/%{distname}.tar.bz2
+Patch0:		plee-the-bear-0.3.1-games.patch
+Patch1:		plee-the-bear-0.3.1-gcc43.patch
+License:	GPLv2
+Group:		Games/Arcade
+URL:		http://plee-the-bear.sourceforge.net/
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRequires:	boost-devel
+BuildRequires:	cmake
+BuildRequires:	libclaw-devel
+BuildRequires:	mesagl-devel
+BuildRequires:	SDL_mixer-devel
+# Dropped temporarily: if it's present, the level editor gets built.
+# As of 0.3.1, the level editor dies in a fire during linking with
+# a ton of wxGTK undefined references. - AdamW 2008/12
+#BuildRequires:	wxGTK2.8-devel
 
 %description
 Plee The Bear is a 2D platform game like those we found on consoles in
@@ -40,15 +49,18 @@ forest. Beginning of the game.
 %prep
 %setup -q -n %{distname}
 %patch0 -p1 -b .games
-sed -ie 's/__LIB__/%_lib/' CMakeLists.txt
+%patch1 -p1 -b .gcc43
+sed -ie 's/__LIB__/%{_lib}/' CMakeLists.txt
 
 %build
-cmake . -DCMAKE_INSTALL_PREFIX=%{_prefix}
+%cmake
 %make
 
 %install
 rm -rf %{buildroot}
+pushd build
 %makeinstall_std
+popd
 rm -f %{buildroot}%{_datadir}/menu/plee-the-bear
 
 %clean
@@ -68,9 +80,7 @@ rm -rf %{buildroot}
 %{_libdir}/lib*.so
 %dir %{_libdir}/%{name}
 %{_libdir}/%{name}/lib*.so
-%dir %{_gamesdatadir}/%{name}
-%{_gamesdatadir}/%{name}/game_description
-%{_gamesdatadir}/%{name}/*.ra
+%{_gamesdatadir}/%{name}
 %{_datadir}/applications/plee-the-bear.desktop
 %{_datadir}/icons/hicolor/*/apps/ptb.png
 %{_datadir}/pixmaps/ptb.*
