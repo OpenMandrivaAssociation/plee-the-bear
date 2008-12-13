@@ -2,7 +2,7 @@
 %define _disable_ld_as_needed		1
 
 %define svn	0
-%define rel	1
+%define rel	2
 %if %{svn}
 %define release		%mkrel 0.%{svn}.%{rel}
 %define distname	%{name}-%{svn}
