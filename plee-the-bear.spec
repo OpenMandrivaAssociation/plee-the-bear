@@ -1,6 +1,6 @@
 
 %define svn	0
-%define rel	3
+%define rel	4
 %if %{svn}
 %define release		%mkrel 0.%{svn}.%{rel}
 %define distname	%{name}-%{svn}
