@@ -1,5 +1,3 @@
-%define _disable_ld_no_undefined	1
-%define _disable_ld_as_needed		1
 
 %define svn	0
 %define rel	2
@@ -18,6 +16,7 @@ Release:	%{release}
 Source0:	http://prdownloads.sourceforge.net/%{name}/%{distname}.tar.bz2
 Patch0:		plee-the-bear-0.3.1-games.patch
 Patch1:		plee-the-bear-0.3.1-gcc43.patch
+Patch2:		plee-the-bear-0.3.1-linkage.patch
 License:	GPLv2
 Group:		Games/Arcade
 URL:		http://plee-the-bear.sourceforge.net/
@@ -50,7 +49,7 @@ forest. Beginning of the game.
 %setup -q -n %{distname}
 %patch0 -p1 -b .games
 %patch1 -p1 -b .gcc43
-sed -ie 's/__LIB__/%{_lib}/' CMakeLists.txt
+%patch2 -p0 -b .linkage
 
 %build
 %cmake
