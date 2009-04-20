@@ -1,19 +1,10 @@
-
-%define svn	0
-%define rel	6
-%if %{svn}
-%define release		%mkrel 0.%{svn}.%{rel}
-%define distname	%{name}-%{svn}
-%else
-%define release		%mkrel %{rel}
-%define distname	%{name}-%{version}
-%endif
+%define rel	7
 
 Summary:	Plee The Bear 2D platform game
 Name:		plee-the-bear
 Version:	0.3.1
-Release:	%{release}
-Source0:	http://prdownloads.sourceforge.net/%{name}/%{distname}.tar.bz2
+Release:	%mkrel %rel
+Source0:	http://prdownloads.sourceforge.net/%{name}/%{name}-%{version}-light.tar.bz2
 Patch0:		plee-the-bear-0.3.1-games.patch
 Patch1:		plee-the-bear-0.3.1-gcc43.patch
 Patch2:		plee-the-bear-0.3.1-linkage.patch
@@ -46,7 +37,7 @@ Following honey drops on the ground, Plee reaches the edge of the
 forest. Beginning of the game.
 
 %prep
-%setup -q -n %{distname}
+%setup -q -n %{name}-%{version}
 %patch0 -p1 -b .games
 %patch1 -p1 -b .gcc43
 %patch2 -p0 -b .linkage
@@ -57,9 +48,8 @@ forest. Beginning of the game.
 
 %install
 rm -rf %{buildroot}
-pushd build
-%makeinstall_std
-popd
+%makeinstall_std -C build
+
 rm -f %{buildroot}%{_datadir}/menu/plee-the-bear
 
 %clean
