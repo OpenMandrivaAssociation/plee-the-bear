@@ -1,17 +1,14 @@
-%define rel	7
-
 Summary:	Plee The Bear 2D platform game
 Name:		plee-the-bear
-Version:	0.3.1
-Release:	%mkrel %rel
-Source0:	http://prdownloads.sourceforge.net/%{name}/%{name}-%{version}-light.tar.bz2
+Version:	0.4.1
+Release:	%mkrel 1
+License:	GPLv2+
+Group:		Games/Arcade
+URL:		http://plee-the-bear.sourceforge.net/
+Source0:	http://prdownloads.sourceforge.net/%{name}/%{name}-%{version}.tar.xz
 Patch0:		plee-the-bear-0.3.1-games.patch
 Patch1:		plee-the-bear-0.3.1-gcc43.patch
 Patch2:		plee-the-bear-0.3.1-linkage.patch
-License:	GPLv2
-Group:		Games/Arcade
-URL:		http://plee-the-bear.sourceforge.net/
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	boost-devel
 BuildRequires:	cmake
 BuildRequires:	libclaw-devel
@@ -21,6 +18,7 @@ BuildRequires:	SDL_mixer-devel
 # As of 0.3.1, the level editor dies in a fire during linking with
 # a ton of wxGTK undefined references. - AdamW 2008/12
 #BuildRequires:	wxGTK2.8-devel
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 Plee The Bear is a 2D platform game like those we found on consoles in
