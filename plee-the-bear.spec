@@ -41,6 +41,8 @@ forest. Beginning of the game.
 rm -rf %{buildroot}
 %makeinstall_std -C build
 
+%find_lang %name %name bear-factory
+
 rm -f %{buildroot}%{_datadir}/menu/plee-the-bear
 
 %clean
@@ -53,7 +55,7 @@ rm -rf %{buildroot}
 %postun -p /sbin/ldconfig
 %endif
 
-%files
+%files -f %name.lang
 %defattr(-,root,root)
 %{_bindir}/*
 %{_libdir}/*.so
