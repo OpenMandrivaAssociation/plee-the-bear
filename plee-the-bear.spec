@@ -6,18 +6,13 @@ License:	GPLv2+
 Group:		Games/Arcade
 URL:		http://plee-the-bear.sourceforge.net/
 Source0:	http://prdownloads.sourceforge.net/%{name}/%{name}-%{version}.tar.xz
-Patch0:		plee-the-bear-0.3.1-games.patch
-Patch1:		plee-the-bear-0.3.1-gcc43.patch
-Patch2:		plee-the-bear-0.3.1-linkage.patch
+Patch2:		plee-the-bear-0.4.1-linkage.patch
 BuildRequires:	boost-devel
 BuildRequires:	cmake
 BuildRequires:	libclaw-devel
 BuildRequires:	mesagl-devel
 BuildRequires:	SDL_mixer-devel
-# Dropped temporarily: if it's present, the level editor gets built.
-# As of 0.3.1, the level editor dies in a fire during linking with
-# a ton of wxGTK undefined references. - AdamW 2008/12
-#BuildRequires:	wxGTK2.8-devel
+BuildRequires:	wxGTK2.8-devel
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
@@ -36,12 +31,10 @@ forest. Beginning of the game.
 
 %prep
 %setup -q -n %{name}-%{version}
-%patch0 -p1 -b .games
-%patch1 -p1 -b .gcc43
 %patch2 -p0 -b .linkage
 
 %build
-%cmake
+%cmake -DBEAR_ENGINE_INSTALL_LIBRARY_DIR=%_lib -DBEAR_FACTORY_INSTALL_LIBRARY_DIR=%_lib -DPTB_INSTALL_CUSTOM_LIBRARY_DIR=%_lib
 %make
 
 %install
@@ -62,12 +55,10 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-%{_gamesbindir}/%{name}
-%{_gamesbindir}/running-bear
-%{_libdir}/lib*.so
-%dir %{_libdir}/%{name}
-%{_libdir}/%{name}/lib*.so
-%{_gamesdatadir}/%{name}
-%{_datadir}/applications/plee-the-bear.desktop
-%{_datadir}/icons/hicolor/*/apps/ptb.png
-%{_datadir}/pixmaps/ptb.*
+%{_bindir}/*
+%{_libdir}/*.so
+%{_datadir}/plee-the-bear
+%{_datadir}/bear-factory
+%{_datadir}/applications/*.desktop
+%{_datadir}/icons/hicolor/*/apps/*.png
+%{_datadir}/pixmaps/*
