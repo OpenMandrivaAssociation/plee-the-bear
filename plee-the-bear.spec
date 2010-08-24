@@ -1,7 +1,7 @@
 Summary:	Plee The Bear 2D platform game
 Name:		plee-the-bear
 Version:	0.4.1
-Release:	%mkrel 4
+Release:	%mkrel 5
 License:	GPLv2+
 Group:		Games/Arcade
 URL:		http://plee-the-bear.sourceforge.net/
@@ -13,6 +13,7 @@ BuildRequires:	libclaw-devel
 BuildRequires:	mesagl-devel
 BuildRequires:	SDL_mixer-devel
 BuildRequires:	wxGTK2.8-devel
+BuildRequires:	docbook-to-man
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
@@ -64,3 +65,4 @@ rm -rf %{buildroot}
 %{_datadir}/applications/*.desktop
 %{_datadir}/icons/hicolor/*/apps/*.png
 %{_datadir}/pixmaps/*
+%{_mandir}/*/*
