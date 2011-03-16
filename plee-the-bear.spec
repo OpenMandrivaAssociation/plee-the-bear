@@ -1,12 +1,12 @@
 Summary:	Plee The Bear 2D platform game
 Name:		plee-the-bear
-Version:	0.4.1
-Release:	%mkrel 6
+Version:	0.5.1
+Release:	%mkrel 1
 License:	GPLv2+
 Group:		Games/Arcade
 URL:		http://plee-the-bear.sourceforge.net/
-Source0:	http://prdownloads.sourceforge.net/%{name}/%{name}-%{version}.tar.xz
-Patch2:		plee-the-bear-0.4.1-linkage.patch
+Source0:	http://prdownloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
+Patch2:		plee-the-bear-0.5.1-link.patch
 BuildRequires:	boost-devel
 BuildRequires:	cmake
 BuildRequires:	libclaw-devel
@@ -32,9 +32,10 @@ forest. Beginning of the game.
 
 %prep
 %setup -q -n %{name}-%{version}
-%patch2 -p0 -b .linkage
+%patch2 -p0
 
 %build
+export CXXFLAGS="%optflags  -DBOOST_FILESYSTEM_VERSION=2"
 %cmake -DBEAR_ENGINE_INSTALL_LIBRARY_DIR=%_lib -DBEAR_FACTORY_INSTALL_LIBRARY_DIR=%_lib -DPTB_INSTALL_CUSTOM_LIBRARY_DIR=%_lib
 %make
 
