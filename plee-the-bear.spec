@@ -43,7 +43,7 @@ export CXXFLAGS="%optflags  -DBOOST_FILESYSTEM_VERSION=2"
 rm -rf %{buildroot}
 %makeinstall_std -C build
 
-%find_lang %name %name bear-factory
+%find_lang %name %name bear-factory bear-engine
 
 rm -f %{buildroot}%{_datadir}/menu/plee-the-bear
 
