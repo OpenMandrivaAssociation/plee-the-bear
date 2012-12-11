@@ -1,0 +1,4 @@
+# We're not actually a library package
+addFilter("E: non-versioned-file-in-library-package")
+addFilter("E: executable-in-library-package")
+addFilter("E: invalid-soname")
