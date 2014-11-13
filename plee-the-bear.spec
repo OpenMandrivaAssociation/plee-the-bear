@@ -1,7 +1,7 @@
 Summary:	Plee The Bear 2D platform game
 Name:		plee-the-bear
 Version:	0.6.0
-Release:	2
+Release:	3
 License:	GPLv2+
 Group:		Games/Arcade
 URL:		http://plee-the-bear.sourceforge.net/
