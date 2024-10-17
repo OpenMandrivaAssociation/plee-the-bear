@@ -4,7 +4,7 @@ Version:	0.6.0
 Release:	4
 License:	GPLv2+
 Group:		Games/Arcade
-URL:		http://plee-the-bear.sourceforge.net/
+URL:		https://plee-the-bear.sourceforge.net/
 Source0:	http://prdownloads.sourceforge.net/%{name}/%{name}-%{version}-light.tar.gz
 Source1:	%{name}.rpmlintrc
 Patch0:		plee-the-bear-0.6.0-svnclawfix.patch
